@@ -30,6 +30,10 @@ e.g.:
 
 `get_uni_stats(df_1620, 'university of washington', 'University of Washington', 'PhD')`
 
+Which results in this image of various stats:
+
+![sample result](app/UC\%20Berkeley.png)
+
 ## Shoutouts
 
 I am standing on the shoulders of these posts:
