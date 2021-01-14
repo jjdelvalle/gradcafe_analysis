@@ -39,5 +39,6 @@ Which results in this image of various stats:
 I am standing on the shoulders of these posts:
 
 * https://debarghyadas.com/writes/the-grad-school-statistics-we-never-had/
+* https://github.com/deedy/gradcafe_data
 * https://www.reddit.com/r/gradadmissions/comments/7srxxy/decision_timelines_for_particular_universities/
 
