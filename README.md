@@ -20,7 +20,7 @@ Could have just as well been:
 
 `python scrape_site.py computer science 257`
 
-Then you will have to edit the `ParseHTML.ipynb` to fit your needs. Most of the work is done, you just have to specify program names and degrees and other details specific to your field.
+Then you will have to edit the `ParseHTML.ipynb` notebook to fit your needs. Most of the work is done, you just have to specify program names and degrees and other details specific to your field.
 
 Finally, use the `GradAnalysis.ipynb` notebook to generate stats for a specific school and/or program:
 
