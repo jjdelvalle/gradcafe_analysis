@@ -1,7 +1,7 @@
 import sys
 import requests
 
-url_form = "http://thegradcafe.com/survey/index.php?q=computer%2A&t=a&pp=250&o=d&p={0}"
+url_form = "http://thegradcafe.com/survey/index.php"
 params = {}
 params['pp'] = 250
 params['t'] = 'a'
