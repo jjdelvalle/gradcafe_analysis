@@ -20,7 +20,17 @@ Could have just as well been:
 
 `python scrape_site.py computer science 257`
 
-Then you will have to edit the `ParseHTML.ipynb` notebook to fit your needs. Most of the work is done, you just have to specify program names and degrees and other details specific to your field.
+This will create a directory have the name of your query. HTML scraped files will be written in sequential order i.e. `1.html`, `2.html`, etc.
+
+Then you will have to run the `parse_html` script in order to process the HTML scraped files and get a usable CSV file which you can then use to analyze whatever you wish. Its functionality is as follows:
+
+`python parse_html.py [path_to_directory_with_html_files] [title_of_csv] [number_pages]`
+
+A more concrete example would be therefore:
+
+`python parse_html.py data/computer cs 257`
+
+Where `data/computer` is the path of the directory holding the sequential HTML files. `cs` would be the name of the CSV file inside the `data` directory.
 
 Finally, use the `GradAnalysis.ipynb` notebook to generate stats for a specific school and/or program:
 
@@ -32,7 +42,7 @@ e.g.:
 
 Which results in this image of various stats:
 
-![sample result](app/UC\%20Berkeley.png)
+![sample result](app/output/UC\%20Berkeley.png)
 
 ## Shoutouts
 

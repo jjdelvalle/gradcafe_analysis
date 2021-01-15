@@ -1,5 +1,6 @@
 import sys
 import requests
+from pathlib import Path
 
 url_form = "http://thegradcafe.com/survey/index.php"
 params = {}
@@ -23,11 +24,13 @@ if __name__ == '__main__':
     params['p'] = i
     r = requests.get(url, params=params)
     r.encoding = 'utf-8'
-    fname = "{data_dir}/{query}_{page}.html".format(
+    Path("{data_dir}{query}".format(data_dir=DATA_DIR, query=params['q'])).mkdir(parents=True, exist_ok=True)
+    fname = "{data_dir}{query}/{page}.html".format(
       query=params['q'],
       data_dir=DATA_DIR,
       page=str(i)
     )
+
     with open(fname, 'w') as f:
       f.write(r.text)
     print("getting {0}...".format(i))
