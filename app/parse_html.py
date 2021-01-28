@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import datetime, time
 from IPython.core.debugger import Pdb
 import sys, re
+import os.path
 from collections import Counter
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -9,27 +10,25 @@ import pandas
 
 
 PROGS = [
-    ('Computer Engineering', 'ECE'),
-    ('Computer Enginnerin', 'ECE'),
-    ('Electrical', 'ECE'),
-    ('ECE', 'ECE'),
-    ('Computer Sc', 'CS'),
-    ('Computer  Sc', 'CS'),
-    ('Computer Sicen', 'CS'),
-    ('Computer Sien', 'CS'),
-    ('Computer S Cience', 'CS'),
-    ('Computer,', 'CS'),
-    ('Computers,', 'CS'),
-    ('ComputerScience', 'CS'),
-    ('Human Computer Interaction', 'HCI'),
-    ('Human-Computer Interaction', 'HCI'),
-    ('Human-computer Interaction', 'HCI'),
-    ('software engineering', 'CS'),
-    ('Embedded', 'ECE'),
-    ('Computer Eng', 'ECE'),
-    ('Computer Vision', 'CS'),
-    ('Information', 'IS'),
-    ('Infomation', 'IS'),]
+    ('Computer Engineering', 'Electrical and Computer Engineering'),
+    ('Computer Enginnerin', 'Electrical and Computer Engineering'),
+    ('Electrical', 'Electrical and Computer Engineering'),
+    ('ECE', 'Electrical and Computer Engineering'),
+    ('Computer Sc', 'Computer Science'),
+    ('Computer  Sc', 'Computer Science'),
+    ('Computer Sicen', 'Computer Science'),
+    ('Computer Sien', 'Computer Science'),
+    ('Computer S Cience', 'Computer Science'),
+    ('Computer,', 'Computer Science'),
+    ('Computers,', 'Computer Science'),
+    ('ComputerScience', 'Computer Science'),
+    ('Human Computer Interaction', 'Human Computer Interaction'),
+    ('Human-Computer Interaction', 'Human Computer Interaction'),
+    ('Human-computer Interaction', 'Human Computer Interaction'),
+    ('software engineering', 'Software Engineering'),
+    ('Embedded', 'Electrical and Computer Engineering'),
+    ('Computer Eng', 'Electrical and Computer Engineering'),
+    ('Computer Vision', 'Computer Science')]
 
     # ('computer graphics', 'Game Development'),
     # ('computer gam', 'Game Development'),
@@ -88,13 +87,18 @@ def process(index, col):
     try:
         major = None
         progtext = col[1].text.strip()
+
+        if not ',' in progtext:
+            print('no comma')
+            errlog['major'].append((index, col))
+        else:
+            parts = progtext.split(',')
+            major = parts[0].strip()
+        progtext = ' '.join(parts[1:])
         for p, nam in PROGS:
-            if p.lower() in progtext.lower():
+            if p.lower() in major.lower():
                 major = nam
                 break
-        if not major:
-            major = 'Other'
-            errlog['major'].append((index, col))
 
         degree = None
         for (d, deg) in DEGREE:
@@ -225,6 +229,9 @@ if __name__ == '__main__':
     n_pages = int(args[3])
     data = []
     for page in range(1, n_pages):
+        if not os.path.isfile('{0}/{1}.html'.format(path, page)):
+            print("Page {0} not found.".format(page))
+            continue
         with open('{0}/{1}.html'.format(path, page), 'r') as f:
             soup = BeautifulSoup(f.read(), features="html.parser")
         tables = soup.findAll('table', class_='submission-table')
